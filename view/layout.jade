@@ -1,0 +1,38 @@
+!!!5
+html
+	head
+		if title && config.company
+			title #{title} - #{config.company.site}
+		link(rel='stylesheet', href='/styles.css')
+	body
+		header
+			.container
+				a(href="/").logo Beesden Web Development
+				input(type='checkbox')#toggle.toggle
+				label(for='toggle').toggleLabel &equiv;
+				nav.menu
+					ul
+						li: a(href="/") Posts
+						li: a(href="/about") About
+						li: a(href="/contact") Contact
+		section
+			.container
+				block content				
+				aside.aside
+					h2 Categories
+					ul
+						li Vivamus
+						li hendrerit arcu
+						li  sed erat molestie
+						li vehicula. Sed auctor
+						li  neque eu tellus rhoncus
+						li ut eleifend nibh porttitor.
+						li  Ut in.
+		footer.footer
+			.container
+				.left (sociallinks)
+				if config.company
+					.right &copy; #{config.company.name}
+						a(href="mailto:#{config.company.email}") #{config.company.email}
+				.center Site built by 
+					a(href="beesden@gmail.com" title="Web Design by Beesden") Beesden

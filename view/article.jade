@@ -1,0 +1,12 @@
+extend layout
+block content
+	.postContainer
+		.postContent
+			h1= article.heading
+				small #{article.publishDate.getDate()}/#{article.publishDate.getMonth()}/#{article.publishDate.getFullYear()} | 
+					span Posted by: 
+						if url
+							a(href="/blog/1#{url.query('author', article.author)}") #{article.author}
+						else
+							span #{article.author}
+			div!= article.description

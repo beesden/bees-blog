@@ -1,0 +1,32 @@
+extend layout
+block content
+	.postList
+		//- Pagination Summary
+		if pagination
+			.pageSummary Displaying #{pagination.firstIndex} - #{pagination.lastIndex} of #{pagination.totalResults} results
+			if url
+				include ./partials/pagination
+		//- Article List
+		if articles
+			for row in articles
+				.row
+					for article in row
+						article.postWrapper
+							.postContent
+								h2
+									a(href='/article/#{article.name}') #{article.heading}
+									small #{article.publishDate.getDate()}/#{article.publishDate.getMonth()}/#{article.publishDate.getFullYear()} | 
+										if url
+											a(href="#{url.path}1#{url.query('author', article.author)}") #{article.author}
+										else
+											span #{article.author}
+								p!=article.summary
+								for tag in article.tags
+									if url 
+										a(href='#{url.path}1#{url.query("tag", tag.name)}').tag #{tag.name}
+									else
+										span #{tag.name}
+								a(href='/article/#{article.name}').button Read more
+		//- Pagination Links
+		if pagination && url
+			include ./partials/pagination

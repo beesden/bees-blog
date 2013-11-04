@@ -1,0 +1,21 @@
+ul.pagination
+
+	//-Display First / Previous Buttons
+	if pagination.firstPage > 1
+		li: a(href="#{url.path}1") &laquo;
+	if pagination.page > 1
+		li: a(href="#{url.path}#{pagination.prevPage}") &lsaquo;
+
+	//- Display Page Links
+	- for (var page = pagination.firstPage; page <= pagination.lastPage; page++) {
+			if page == pagination.page 
+				li.active: span #{page}
+			else
+				li: a(href="#{url.path}#{page}") #{page}
+	- }
+
+	//-Display Next / Last Buttons
+	if pagination.page < pagination.totalPages
+		li: a(href="#{url.path}#{pagination.nextPage}") &rsaquo;
+	if pagination.lastPage < pagination.totalPages
+		li: a(href="#{url.path}#{pagination.totalPages}") &raquo;
