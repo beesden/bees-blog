@@ -10,24 +10,37 @@ html
 				a(href="/").logo Beesden Web Development
 				input(type='checkbox')#toggle.toggle
 				label(for='toggle').toggleLabel &equiv;
-				nav.menu
-					ul
-						li: a(href="/") Posts
-						li: a(href="/about") About
-						li: a(href="/contact") Contact
+				if data && data.nav
+					nav.menu
+						ul
+							li: a(href="/blog") Posts
+							for page in data.nav
+								li: a(href="/#{page.name}") #{page.title}
 		section
 			.container
 				block content				
 				aside.aside
-					h2 Categories
-					ul
-						li Vivamus
-						li hendrerit arcu
-						li  sed erat molestie
-						li vehicula. Sed auctor
-						li  neque eu tellus rhoncus
-						li ut eleifend nibh porttitor.
-						li  Ut in.
+					if data && data.recent
+						h2 Recent Posts
+						ol
+							for article in data.recent
+								li
+									a(href='/article/#{article.name}') #{article.heading}
+									small #{article.publishDate.getDate()}/#{article.publishDate.getMonth()}/#{article.publishDate.getFullYear()} | 
+										if article.author
+											if url
+												a(href="/blog/1#{url.query('author', article.author)}") #{article.author}
+											else
+												span #{article.author}
+					if data && data.tags
+						h2 Tags
+						ul
+							for tag in data.tags
+								li
+									if url
+										a(href="/blog/1#{url.query('tag', tag)}").tag #{tag}
+									else
+										span.tag=tag				
 		footer.footer
 			.container
 				.left (sociallinks)

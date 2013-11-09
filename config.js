@@ -1,13 +1,27 @@
 module.exports = {
+
+	// Blog server config
+	blog: {
+		port: 2000
+	},
+
 	// Site Information
 	company: {
 		name: 'Sample Blog',
-		email: 'aaa@bbb.co.uk',
+		email: 'beesden@gmail.com',
 		site: 'Beesden Blog'
 	},
 
-	// Server configuration
-	port: 2000,
+	// Email config
+	email: {
+		host: "smtp.gmail.com",
+		secureConnection: true, 
+		port: 465,
+		auth: {
+			user: "email@gmail.com",
+			pass: "password"
+		}
+	},
 
 	// Mongo configuration
 	mongo: {

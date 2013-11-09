@@ -1,17 +1,3 @@
 extend layout
 block content		
-	.error
-		h1 Whoops
-		p: strong That page can't be found!
-		h2 This may be because of
-		ul
-			li An out of date bookmark
-			li A mis-typed address
-			li The page has been removed
-			li There has been an error
-		h2 Please try one of the following
-		ul
-			li Return to the 
-				a(href="/") Home page
-			li If you feel you received this in error, you can 
-				a(href="mailto:config.company.email") contact us
+	include ./partials/error

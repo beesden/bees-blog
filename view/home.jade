@@ -1,25 +1,25 @@
 extend layout
 block content
-	.postList
+	.postList.mainSection
 		//- Pagination Summary
-		if pagination
-			.pageSummary Displaying #{pagination.firstIndex} - #{pagination.lastIndex} of #{pagination.totalResults} results
+		if data.pagination
+			.pageSummary Displaying #{data.pagination.firstIndex} - #{data.pagination.lastIndex} of #{data.pagination.totalResults} results
 			if url
 				include ./partials/pagination
 		//- Article List
-		if articles
-			for row in articles
+		if data.articles
+			for row in data.articles
 				.row
 					for article in row
-						article.postWrapper
-							.postContent
+						.pageWrapper.article
+							article.content
 								h2
 									a(href='/article/#{article.name}') #{article.heading}
 									small #{article.publishDate.getDate()}/#{article.publishDate.getMonth()}/#{article.publishDate.getFullYear()} | 
 										if url
 											a(href="#{url.path}1#{url.query('author', article.author)}") #{article.author}
 										else
-											span #{article.author}
+											span #{article.author.name}
 								p!=article.summary
 								for tag in article.tags
 									if url 
@@ -28,5 +28,5 @@ block content
 										span #{tag.name}
 								a(href='/article/#{article.name}').button Read more
 		//- Pagination Links
-		if pagination && url
+		if data.pagination && url
 			include ./partials/pagination

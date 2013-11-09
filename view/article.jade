@@ -1,12 +1,16 @@
 extend layout
 block content
-	.postContainer
-		.postContent
-			h1= article.heading
-				small #{article.publishDate.getDate()}/#{article.publishDate.getMonth()}/#{article.publishDate.getFullYear()} | 
-					span Posted by: 
-						if url
-							a(href="/blog/1#{url.query('author', article.author)}") #{article.author}
-						else
-							span #{article.author}
-			div!= article.description
+	if data.article
+		.pageWrapper.mainSection
+			.content
+				h1= data.article.heading
+					small #{data.article.publishDate.getDate()}/#{data.article.publishDate.getMonth()}/#{data.article.publishDate.getFullYear()} | 
+						span Posted by: 
+							if data.article.author
+								if url
+									a(href="/blog/1#{url.query('author', data.article.author)}") #{data.article.author}
+								else
+									span #{data.article.author}
+				div!= data.article.description
+	else
+		include ./partials/error

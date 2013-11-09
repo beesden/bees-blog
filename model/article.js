@@ -11,9 +11,15 @@ var mongoose = require('mongoose'),
 		description: String,
 		status: Number,
 		tags: [{
-			name: String
+			name: String,
+			heading: String
 		}]
 	});
 
+// Fetch all tags only
+dbSchema.statics.getTags = function (filters, callback) { 
+	return this.distinct('tags.name', callback);
+};	
+
 // Attach static services and compile db model
-module.exports = schemaServices(mongoose.connection, 'article', dbSchema);
+module.exports = schemaServices(mongoose.connection, 'Article', dbSchema);

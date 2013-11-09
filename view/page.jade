@@ -1,32 +1,11 @@
 extend layout
 block content		
-	if pagination
-		p Displaying #{pagination.firstIndex} - #{pagination.lastIndex} of #{pagination.totalResults} results
-	.row #{articles}
-	if articles
-		for article in articles
-			.row
-				.col-md-6.col-sm-6
-					h2=article.name
-					p=article.summary
-	.row
-		.col-md-6.col-sm-6
-			h2 Lorem Ipsum
-			p Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in.
-			a(href='/article/03-2012/name').btn.btn-primary.pull-right Read more
-		.col-md-6.col-sm-6
-			h2 Lorem Ipsum
-			p Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in.
-			a(href='/article/03-2012/name').btn.btn-primary.pull-right Read more
-	.row
-		.col-md-6.col-sm-6
-			h2 Lorem Ipsum
-			p Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in.
-			a(href='/article/03-2012/name').btn.btn-primary.pull-right Read more
-		.col-md-6.col-sm-6
-			h2 Lorem Ipsum
-			p Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in.
-			a(href='/article/03-2012/name').btn.btn-primary.pull-right Read more
-
-	if pagination
-		include ./partials/pagination
+	if data && data.page
+		.pageWrapper.mainSection
+			.content
+				h1=data.page.heading
+				div!=data.page.content
+				if data.page.name == 'contact'
+					include ./partials/contact
+	else 
+		include ./partials/error

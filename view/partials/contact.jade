@@ -1,0 +1,16 @@
+if error
+	p.alert There has been an error whilst submitting your form, or the form may not have been filled out correctly. Please try again.
+form(method="post" action="contact").contact
+	fieldset
+		legend Fill in the form below, and we'll try to respond within 48 hours.
+
+		label(for="name") Name:
+		input(name="name" id="name" type="text" placeholder="Please enter your name" required="true")
+			
+		label(for="email") Email:
+		input(name="email" id="email" type="email" placeholder="Please enter your email address" required="true")
+			
+		label(for="message") Message:
+		textarea(name="message" id="message" placeholder="Include all the details you can" required="true")
+
+		button.button Send email
