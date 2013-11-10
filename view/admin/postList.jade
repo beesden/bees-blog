@@ -1,0 +1,32 @@
+extend layout
+block content
+	ol.breadcrumbs
+		li: a(href="/") Dashboard
+		li: span Posts
+	if update 
+		.msgConfirm Your article has been succesfully updated.
+	h1 Posts
+	if data.pagination
+		if url
+			include ../partials/pagination
+		.pageSummary Displaying #{data.pagination.firstIndex} - #{data.pagination.lastIndex} of #{data.pagination.totalResults} results
+	ul.list
+		li.listTitle
+			span.title Title
+			span.author Author
+			span.tags Tags
+			span.date Published
+		for article in data.articles
+			li.listItem
+				a(href='/post/#{article.name}').title #{article.heading}
+				span.author=article.author
+				span.tags
+					for tag in article.tags
+						em #{tag.name},
+				if article.status > 1 || article.publishDate > new Date()
+					span.date: em Unpublished
+				else
+					span.date #{article.publishDate.getDate()}/#{article.publishDate.getMonth()}/#{article.publishDate.getFullYear()}
+
+	if data.pagination && url
+		include ../partials/pagination

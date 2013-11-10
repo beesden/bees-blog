@@ -3,11 +3,11 @@ var mongoose = require('mongoose'),
 
 	// Define DB schema
 	dbSchema = new mongoose.Schema({
-		_id: String
 		email: String,
+		name: String,
 		username: String,
 		password: String,
 	});
 
 // Attach static services and compile db model
-module.exports = schemaServices(mongoose.connection, 'Author', dbSchema);
+module.exports = schemaServices(mongoose.connection, 'user', dbSchema);

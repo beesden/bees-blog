@@ -1,23 +1,19 @@
 var base = require("./base"),
-	articleModel,
+	articleModel = require('../model/article.js'),
+	pageModel = require('../model/page.js'),
 	filters,
 
 	// Display article from DB
 	article = function(req, res, config) {
-		data = {};
 		filters = {status: 1, name: req.params.name};
-		require('../model/article.js').getByName(filters, function(err, article) {
-			data.article = article;
-			base.load(req, res, config, data, './article', article.heading);
+		articleModel.getByName(filters, function(err, article) {
+			data = {article: article};
+			base.layout(req, res, config, data, './article', article.heading);
 		})		
 	},
 	// Display error page
 	error = function(req, res, config) {
-		res.render('./404', {
-			'config': config,
-			'title': 'Page not Found',
-			'url': require('./base.js').url(req)
-		});	
+		base.layout(req, res, config, data, './404', 'Page not Found');
 	},
 	// Submit Contact Us form
 	enquirySend = function(req, res, config) {
@@ -36,9 +32,6 @@ var base = require("./base"),
 	},
 	// Display blog feed
 	postlist = function(req, res, config) {
-		// Add article service
-		articleModel = require('../model/article.js');
-		data = {};
 		// Add filters
 		filters = {status: 1};
 		if (req.query.author != null) {
@@ -49,22 +42,20 @@ var base = require("./base"),
 		}
 		// Get pagination of articles
 		articleModel.countAll(filters, function(err, count) {
-			var pagination = base.pagination(req, count);
+			var pagination = base.pagination(req, count, 8);
 			// Get article list
 			articleModel.getPaged(pagination, filters, function(err, articles) {
-				data.articles = base.rowDivide(articles, 2);
-				data.pagination = pagination;
-				base.load(req, res, config, data, './home', 'Home');
+				data = {articles: base.rowDivide(articles, 2), pagination: pagination};
+				base.layout(req, res, config, data, './home', 'Home');
 			});
 		});		
 	},
 	// Display content page from DB
 	run = function(req, res, config) {
-		data = {};
 		filters = {name: req.params.name};
-		require('../model/page.js').getByName(filters, function(err, page) {
-			data.page = page;
-			base.load(req, res, config, data, './page', page.heading);
+		pageModel.getByName(filters, function(err, page) {
+			data = {page: page};
+			base.layout(req, res, config, data, './page', page.heading);
 		})		
 	};
 

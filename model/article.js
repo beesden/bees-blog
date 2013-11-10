@@ -22,4 +22,4 @@ dbSchema.statics.getTags = function (filters, callback) {
 };	
 
 // Attach static services and compile db model
-module.exports = schemaServices(mongoose.connection, 'Article', dbSchema);
+module.exports = schemaServices(mongoose.connection, 'article', dbSchema);

@@ -31,6 +31,7 @@ header .logo {background:url('/images/styles.png') 0 -77px no-repeat; float:left
 .pageWrapper {padding:30px; }
 .article {width:50%;padding:15px; }
 .content {background:#fff; box-shadow:0 1px 5px #bbb; padding:40px; position:relative; }
+.cke_editable {background:#fff; padding:20px;}
 
 /* Page / Article styles */
 .pageWrapper .content h2 {color:#454a4e; margin:0; }

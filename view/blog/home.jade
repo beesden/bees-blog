@@ -5,7 +5,7 @@ block content
 		if data.pagination
 			.pageSummary Displaying #{data.pagination.firstIndex} - #{data.pagination.lastIndex} of #{data.pagination.totalResults} results
 			if url
-				include ./partials/pagination
+				include ../partials/pagination
 		//- Article List
 		if data.articles
 			for row in data.articles
@@ -29,4 +29,4 @@ block content
 								a(href='/article/#{article.name}').button Read more
 		//- Pagination Links
 		if data.pagination && url
-			include ./partials/pagination
+			include ../partials/pagination

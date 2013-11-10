@@ -5,6 +5,7 @@
 
 	"dependencies": {
 		"async": "0.2.9",
+		"node-ckeditor": "4.2.561",
 		"express": "3.4.4",
 		"jade": "0.35.0",
 		"mongoose": "3.8.0",

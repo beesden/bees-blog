@@ -7,15 +7,15 @@ html
 	body
 		header
 			.container
-				a(href="/").logo Beesden Web Development
+				a(href="/").logo #{config.company.site}
 				input(type='checkbox')#toggle.toggle
 				label(for='toggle').toggleLabel &equiv;
 				if data && data.nav
 					nav.menu
 						ul
-							li: a(href="/blog") Posts
+							li: a(href="/blog/") Posts
 							for page in data.nav
-								li: a(href="/#{page.name}") #{page.title}
+								li: a(href="/#{page.name}/") #{page.title}
 		section
 			.container
 				block content				

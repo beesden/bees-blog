@@ -1,6 +1,11 @@
 module.exports = {
 
 	// Blog server config
+	admin: {
+		port: 2001
+	},
+
+	// Blog server config
 	blog: {
 		port: 2000
 	},

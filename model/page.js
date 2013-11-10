@@ -11,4 +11,4 @@ var mongoose = require('mongoose'),
 	});
 
 // Attach static services and compile db model
-module.exports = schemaServices(mongoose.connection, 'Page', dbSchema);
+module.exports = schemaServices(mongoose.connection, 'page', dbSchema);

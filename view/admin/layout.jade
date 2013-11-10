@@ -1,0 +1,29 @@
+!!!5
+html
+	head
+		title Beesden Blog Admin
+		link(rel='stylesheet', href='/admin.css')
+		script(src="/admin.js")
+	body
+		header
+			a(href="/").logo Beesden Blog
+
+			label(for='profile').toggleLabel &equiv;
+			input(type='checkbox')#profile.toggle
+			.toggleShow.profile
+				img(src="http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=64")
+				span Welcome, #{user.name}
+				a(href="/users/#{user.name}") Edit user
+				a(href="/logout") Log out
+
+			label(for='toggle').toggleLabel.tablet &equiv;
+			input(type='checkbox')#toggle.toggle
+			ul.toggleShow.menu
+				li: a(href="/posts/") Posts
+				li: a(href="/pages/") Pages
+				li: a(href="/users/") Users
+		section
+			block content
+		footer.footer
+			span &copy; Beesden Web Design
+			span: a(href="mailto:beesden@gmail.com" target="_blank") Contact Us

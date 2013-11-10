@@ -1,18 +1,10 @@
 // Insert 40 sample posts, 4 are on hold
 db.articles.drop();
-db.authors.drop();
 db.pages.drop();
+db.users.drop();
 
 var summary = '<p>Bacon ipsum dolor sit amet esse duis pastrami anim, pancetta fatback capicola officia tenderloin.</p><p>Meatloaf culpa ut, bacon sed sausage jerky cillum est ham ad laboris ham hock dolore. Venison ut enim, aliqua elit frankfurter et incididunt consequat culpa nostru aliqua elit pancetta.</p>',
 	description = '<p>Bacon ipsum dolor sit amet bacon turkey brisket ball tip rump bresaola pastrami.  Tenderloin tongue pork belly, capicola jerky turkey drumstick.  Boudin bacon pancetta shoulder meatball.  Swine frankfurter sausage, leberkas andouille beef tri-tip.  Meatball ham salami tenderloin cow corned beef swine kielbasa bacon bresaola.  Kevin turducken brisket, drumstick ribeye strip steak jowl leberkas.  Shoulder corned beef beef ribs, bacon ribeye kielbasa sausage ball tip pork loin biltong tail salami turkey andouille.</p><p>Short loin leberkas swine ribeye chicken turducken.  Pork chop ball tip ham hock, leberkas boudin flank pork belly beef kielbasa.  Ribeye doner t-bone chuck tri-tip sausage pork belly beef brisket corned beef salami turkey swine.  Short loin brisket spare ribs, ham beef ribs flank drumstick beef ham hock chuck cow salami.  Tenderloin pork loin meatball rump.</p><p>Sirloin bresaola sausage andouille rump pancetta shoulder hamburger jowl flank ham pork ham hock.  Frankfurter ribeye pork loin bresaola tri-tip beef ribs doner meatloaf sausage shankle.  Capicola biltong tri-tip tongue pork prosciutto bresaola leberkas shoulder ribeye pork chop rump pig frankfurter.  Leberkas andouille meatloaf kevin swine tri-tip shankle, pork doner filet mignon spare ribs ground round chuck.</p><p>Chuck jerky beef, ball tip short loin rump capicola.  Spare ribs drumstick tenderloin sausage.  Turducken capicola jerky, kevin corned beef beef bacon pancetta short ribs filet mignon chuck salami andouille sirloin pork belly.  Venison ham pork chop pork, rump pastrami pork loin jowl strip steak turducken chuck shankle.  Meatloaf leberkas ham hock ball tip flank kielbasa.</p><p>Salami pork belly tenderloin turducken meatloaf ribeye prosciutto fatback.  Ham hock ground round turducken, tri-tip andouille chicken beef corned beef pork belly t-bone boudin drumstick biltong.  Boudin tail venison drumstick leberkas fatback, filet mignon rump pork shoulder flank pork loin.  Shank turducken swine jerky, pork chop pork belly biltong.  Corned beef meatball tongue pancetta brisket drumstick.  Ground round corned beef pork chop tenderloin doner pork loin hamburger pork belly.</p>';
-
-db.authors.insert(
-	[
-		{_id: 'Beesden', email: 'beesden@gmail.com', username : 'beesden', password: 'password' },
-		{_id: 'Howard', email: 'howard@howard.com', username : 'howard', password: 'password'	},
-		{_id: 'Dave', email: 'dave@dave.com', username : 'dave', password: 'password'	},
-	]
-)
 
 for (var i = 1; i <= 4; i++) {
 	db.articles.insert( 
@@ -39,3 +31,11 @@ db.pages.insert(
 		{ name : 'confirmation', title: 'Confirmation', heading: 'Enquiry sent', pageOrder: 0, content: "<p><strong>Thank you for your message.</strong></p><p>We'll make very effort to respond within the next 24-48 hours or sooner.</p>"}
 	]
 );
+
+db.users.insert(
+	[
+		{name: 'Beesden', email: 'beesden@gmail.com', username : 'admin', password: 'password' },
+		{name: 'Howard', email: 'howard@howard.com', username : 'howard', password: 'password'	},
+		{name: 'Dave', email: 'dave@dave.com', username : 'dave', password: 'password'	},
+	]
+)

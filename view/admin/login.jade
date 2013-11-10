@@ -1,0 +1,24 @@
+!!!5
+html
+	head
+		title Beesden Blog Login
+		link(rel='stylesheet', href='/admin.css')
+		script(src="/admin.js")
+	body.login
+		.container
+			h1 Log in
+			if logout
+				p.msgConfirm You have been successfully logged out.
+			if error
+				p.msgWarn Your attempt to log in has been unsuccessful
+			form(method="POST" action="/login").dataForm
+				fieldset
+					legend Please enter your username and password to log in
+
+					label(for="username") User name
+					input(name="username" id="username" type="text").input
+
+					label(for="password") Password
+					input(name="password" id="password" type="password").input
+
+					button.button Log In

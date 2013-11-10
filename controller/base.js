@@ -1,6 +1,48 @@
 module.exports = {
 	name: "base",
-	load: function(req, res, config, data, view, title) {
+	admin: function(req, res, config, data, view) {
+		res.render(view, {
+			'config': config,
+			'data': data,
+			'update': req.query.update,
+			'url': require('./base.js').url(req),
+			'user': req.session.userAuth			
+		});
+	},
+	// Check if user is authorised in db
+	authorize: function(req) {
+		var userModel = require('../model/user.js');
+	    if (!req.session.userAuth) {
+	    	userModel.getByName({username: req.body.username, password: req.body.password}, function(err, userData) {
+				if (userData) {
+					req.session.userAuth = userData;
+					req.session.save(function(err) {
+           				return true
+           			});
+				} else {
+					return false
+				};
+			})
+		} else {
+			return true;
+		}
+	},
+	// Generic Get Filters Function
+	getFilters: function(req) {
+		filters = {};
+		if (req && req.query) {
+			if (req.query.author != null) {
+				filters['author'] = req.query.author;
+			}
+			if (req.query.status != null) {
+				filters['status'] = req.query.status;
+			}
+			if (req.query.tag != null) {
+				filters['tags'] = {$elemMatch: {'name': req.query.tag}};
+			}
+		}
+	},
+	layout: function(req, res, config, data, view, title) {
 		var async = require('async'),
 			pageModel = require('../model/page.js'),
 			articleModel = require('../model/article.js');
@@ -37,11 +79,17 @@ module.exports = {
 			});
 		});
 	},
-	pagination: function(req, count, status, baseUrl) {				
+	login: function(req, res) {
+		res.render('./login', {
+			'error': req.query.error,
+			'logout': req.query.logout,
+		});		
+	},
+	pagination: function(req, count, perPage) {				
 		var showPages = 1,
 			// Check query params for page & result and calculate max pages
 			page = parseInt(req.query.page ? isNaN(req.query.page) : isNaN(req.params.page) ? 1 : req.params.page),
-			results = req.query.results ? isNaN(req.query.results) : 8,
+			results = req.query.results ? isNaN(req.query.results) : perPage,
 			pages = Math.ceil(count / results);	
 
 		// Set first and last result indexes
@@ -95,8 +143,7 @@ module.exports = {
 	},
 	url: function(req) {
 		// Retrieve the base url and function to update params
-		var baseUrl = req.url.split('?')[0].replace(/\/(blog\/[^\/]+)?/, '/blog/'),
-			baseQuery = function(key, value) {
+		var	baseQuery = function(key, value) {
 				var params = req.url.indexOf('?') > -1 ? req.url.split('?')[1] : '',
 					regex = new RegExp('[?&]' + key + '=([^&]*)');
 				// Remove existing key from query
@@ -106,6 +153,11 @@ module.exports = {
 				}
 				// Return existing + key + value
 				return params + (params.length ? '&' : '?') + key + '=' + value;
+			},
+			// Remove pagination from url and ensure leading slash
+			baseUrl = req.url == '/' ? '/blog/' : req.url.split('?')[0].replace(/^(.*)\/(\d+)?$/, '$1/');
+			if (baseUrl.slice(-1) != '/') {
+				baseUrl = baseUrl.concat('/');
 			}
 
 		return {
