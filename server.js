@@ -8,10 +8,10 @@ module.exports = function(config, server) {
 	// Configure Jade and resource directory
 	app.set('views', __dirname + '/view/' + server)
 	app.set('view engine', 'jade');
-	app.use(express.favicon('assets/favicon' + server + '.ico'));
+	app.use(express.favicon('assets/favicon-' + server + '.ico'));
 	app.use(express.static('./assets'));
 	app.use(express.cookieParser());
-	app.use(express.session({secret: '1234567890QWERTY'}));
+	app.use(express.session({secret: '5E1J9d2Qf564Z92'}));
 
 	// Allow post data for express
 	app.use(express.json());

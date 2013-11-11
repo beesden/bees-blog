@@ -26,35 +26,29 @@ module.exports = function(app, config) {
 
 	/* Blog post config */
 	app.all('/posts/:page?', function(req, res, next) {
-		if (base.authorize(req)) {
+		base.authorize(req, res, function() {
 			console.info("Admin: View post list: " + req.url);
 			postList(req, res, config);
-		} else {
-			base.login(req, res);
-		}
+		});
 	}); 
 	app.get('/post/:name', function(req, res, next) {
-		if (base.authorize(req)) {
+		base.authorize(req, res, function() {
 			console.info("Admin: Create / edit post: " + req.url);
 			postForm(req, res, config);
-		} else {
-			base.login(req, res);
-		}
+		});
 	});
 	app.post('/post', function(req, res, next) {
-		if (base.authorize(req)) {onsole.info("Admin: Create / edit post: " + req.url);
+		base.authorize(req, res, function() {
+			console.info("Admin: Create / edit post: " + req.url);
 			update = new articleModel(req.body);
 			// Set attributes if not already set
 			update.name = update.name || update.heading.toLowerCase().replace(/ /g, '-');
 			update.author = update.author || 'Beesden';
 			// Save the object to the DB
 			console.log(req.body._id);
-			articleModel.where({ _id: req.body._id}).update(req.body, function() {
+			articleModel.where({ _id: req.body._id}).update({$set: req.body}, function() {
 				res.redirect('/posts?update=true');
 			});
-		} else {
-			base.login(req, res);
-		}
-
+		});
 	}); 
 };

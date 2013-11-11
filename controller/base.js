@@ -10,21 +10,25 @@ module.exports = {
 		});
 	},
 	// Check if user is authorised in db
-	authorize: function(req) {
+	authorize: function(req, res, ifTrue, ifFalse) {
 		var userModel = require('../model/user.js');
 	    if (!req.session.userAuth) {
 	    	userModel.getByName({username: req.body.username, password: req.body.password}, function(err, userData) {
 				if (userData) {
 					req.session.userAuth = userData;
 					req.session.save(function(err) {
-           				return true
+           				ifTrue();
            			});
 				} else {
-					return false
+					if (typeof ifFalse === 'function') {
+						ifFalse()
+					} else {
+						require('./base.js').login(req, res);	
+					} 
 				};
 			})
 		} else {
-			return true;
+			ifTrue()
 		}
 	},
 	// Generic Get Filters Function
@@ -80,10 +84,15 @@ module.exports = {
 		});
 	},
 	login: function(req, res) {
-		res.render('./login', {
-			'error': req.query.error,
-			'logout': req.query.logout,
-		});		
+		if (req && req.session) {
+			req.session.loginDir = req.url.match(/\/login.*/) ? '/' : req.url;
+			req.session.save(function(err) {
+	           	res.render('./login', {
+					'error': req.query.error,
+					'logout': req.query.logout,
+				});	
+	        });	
+	       }
 	},
 	pagination: function(req, count, perPage) {				
 		var showPages = 1,

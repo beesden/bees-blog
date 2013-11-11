@@ -19,28 +19,23 @@ module.exports = function(app, config) {
 	});
 	app.post('/login', function(req, res){
 		console.info("User attempting to login: " + req.body.username);
-		if (base.authorize(req)) {
-			console.log(base.authorize(req));
-			dashboard();
-		} else {
+		base.authorize(req, res, function() {
+			res.redirect(req.session.loginDir ? req.session.loginDir : '/');
+		}, function() {
 			res.redirect('/login?error=true');
-		};
+		});
 	});
 	app.get('/login', function(req, res){
 		console.info("Admin: Login page: " + req.url);
-		if (base.authorize(req, res, config)) {
-			res.redirect('/');
-		} else {
-			base.login(req, res);
-		};
+		base.authorize(req, res, function() {
+			res.redirect(req.session.loginDir ? req.session.loginDir : '/');
+		});
 	});
 	app.all('/', function(req, res, next) {
-		if (base.authorize(req)) {
+		base.authorize(req, res, function() {
 			console.info("Admin: Dashboard " + req.url);
 			base.admin(req, res, config, null, './layout');
-		} else {
-			base.login(req, res);
-		}
+		});
 	}); 
 	app.get('*', function(req, res){
 		console.info("Admin: unknown page: " + req.url);
