@@ -1,0 +1,26 @@
+extend layout
+block content
+	ol.breadcrumbs
+		li: a(href="/") Dashboard
+		li: span Users
+	if update 
+		.msgConfirm Your user has been succesfully updated.
+	h1 Users
+	if data.pagination
+		if url
+			include ../partials/pagination
+		.pageSummary Displaying #{data.pagination.firstIndex} - #{data.pagination.lastIndex} of #{data.pagination.totalResults} results
+	ul.list
+		li.listTitle
+			span.title Username
+			span.date Email
+		for user in data.users
+			li.listItem
+				a(href='/user/#{user.name}').title #{user.name}
+					em=user.username
+				span.date=user.email
+
+	a(href="/user/create").button Add user
+
+	if data.pagination && url
+		include ../partials/pagination

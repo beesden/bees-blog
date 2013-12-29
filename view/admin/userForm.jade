@@ -1,0 +1,36 @@
+extend layout
+block content
+	ol.breadcrumbs
+		li: a(href="/") Dashboard
+		li: a(href="/users/") Users
+		li 
+			if data.article
+				span Edit user
+			else
+				span Add user	
+	if data.article
+		h1 Edit user
+	else
+		h1 Add user
+	form(method="POST" name="article" action="/user").dataForm
+		if data.article
+			input(type="hidden" name="id" value="#{data.user.id}")
+		fieldset
+			if data.article
+				legend Fill in the fields to update an existing user
+			else
+				legend Fill in the fields to create a new user
+
+			label(for="name") Full name
+			input(type="text" name="name" id="name" value="#{data.user.name ? data.user.name : ''}").input
+
+			label(for="email") Email address
+			input(type="email" name="email" id="email" value="#{data.user.email ? data.user.email : ''}").input
+
+			label(for="username") User name
+			input(type="text" name="username" id="username" value="#{data.user.username ? data.user.username : ''}").input
+
+			label(for="password") User name
+			input(type="password" name="password" id="password").input
+
+			button.button Save changes

@@ -42,11 +42,10 @@ module.exports = function(app, config) {
 			console.info("Admin: Create / edit post: " + req.url);
 			update = new articleModel(req.body);
 			// Set attributes if not already set
-			update.name = update.name || update.heading.toLowerCase().replace(/ /g, '-');
-			update.author = update.author || 'Beesden';
+			req.body.name = req.body.name || req.body.heading.toLowerCase().replace(/ /g, '-');
+			req.body.author = req.body.author || req.session.userAuth.name;
 			// Save the object to the DB
-			console.log(req.body._id);
-			articleModel.where({ _id: req.body._id}).update({$set: req.body}, function() {
+			articleModel.where({_id: req.body._id}).update({$set: req.body}, function() {
 				res.redirect('/posts?update=true');
 			});
 		});

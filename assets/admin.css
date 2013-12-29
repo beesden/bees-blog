@@ -8,7 +8,7 @@ h2 {font-size:20px}
 a:link, a:visited {color:#48a068; }
 a:hover,a:focus {color:#68c088; }
 cite {display:block; font-size:2em; padding:10px 30px; margin:1em 0; border-left:4px solid #f3f3f3; color:#888;}
-.button, .button:link, .button:visited {background:linear-gradient(to bottom, #69bc87 0%, #48a068 100%); border:1px solid #449963; border-radius:4px; color:#fff; cursor:pointer; font:12px/32px 'Open Sans','Tahoma','Geneva'; padding:0 12px; text-decoration:none; }
+.button, .button:link, .button:visited {background:linear-gradient(to bottom, #69bc87 0%, #48a068 100%); border:1px solid #449963; border-radius:4px; color:#fff; cursor:pointer; display:inline-block; font:12px/32px 'Open Sans','Tahoma','Geneva'; padding:0 12px; text-decoration:none; }
 .button:hover, .button:focus {background:#48a068; }
 
 .tablet {display:none;}
@@ -72,8 +72,14 @@ section .list .date {text-align:right; width:15%;}
 /* Error page styles */
 .error {padding:40px 40px 100px; }
 .error h1 {border-bottom:none;font-size:70px; line-height:1em;}
-.error h2, .error p {margin:1em 0;}
+.error h2, .error p {margin:3em 0;}
 .error ul {margin:1em 30px; }
+
+/* Dashboard styles */
+.dashboard {box-shadow:-2px 2px 8px rgba(0,0,0,0.3); list-style:none;margin:2em 0;}
+.dashboard li {display:inline-block; margin:0 0 1em; vertical-align:top; width:50%;}
+.dashboard h2 {background:#efe; font-size:18px; text-transform:uppercase; margin:0 0 1em; padding:1em 15px 5px;}
+.dashboard li div {padding:0 15px;}
 
 .login {background:#000 url('/images/login.jpg') center center no-repeat;}
 .login .container {background: rgba(255,255,255,0.95); margin:auto; padding:20px; max-width:400px;}
@@ -98,8 +104,6 @@ section .list .date {text-align:right; width:15%;}
  	section .listTitle {display:none;}
 	section .list .title, section .list .tags {width:70%;}
 	section .list .author, section .list .date {color:#999; text-align:right; width:30%;}
+	.dashboard li {width:100%;}
 	.dataForm label, .dataForm .input, .dataForm .button {display:block; max-width:100%; width:100%}
-}
-/* Tablet / Mobile Styles */
- @media all and (max-width:989px) {
 }

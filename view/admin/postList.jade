@@ -28,5 +28,7 @@ block content
 				else
 					span.date #{article.publishDate.getDate()}/#{article.publishDate.getMonth()}/#{article.publishDate.getFullYear()}
 
+	a(href="/post/create").button Add post		
+
 	if data.pagination && url
 		include ../partials/pagination

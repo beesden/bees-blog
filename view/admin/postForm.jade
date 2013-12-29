@@ -4,31 +4,31 @@ block content
 		li: a(href="/") Dashboard
 		li: a(href="/posts/") Posts
 		li 
-			if data.article
+			if data.article.length
 				span Edit post
 			else
 				span Add post	
-	if data.article
+	if data.article.length
 		h1 Edit post
 	else
 		h1 Add post
 	form(method="POST" name="article" action="/post").dataForm
-		if data.article
-			input(type="hidden" name="_id" value="#{data.article.id}")
+		if data.article.length
+			input(type="hidden" name="id" value="#{data.article.id}")
 			input(type="hidden" name="name" value="#{data.article.name}")
 			input(type="hidden" name="author" value="#{data.article.author}")
 			input(type="hidden" name="publishDate" value="#{data.article.publishDate}")
 		fieldset
-			if data.article
+			if data.article.length
 				legend Fill in the fields to update an existing post
 			else
 				legend Fill in the fields to create a new post
 
 			label(for="heading") Heading
-			input(type="text" name="heading" id="heading" value="#{data.article.heading}").input
+			input(type="text" name="heading" id="heading" value="#{data.article.heading ? data.article.heading : ''}").input
 
 			label(for="summary") Summary
-			input(type="text" name="summary" id="summary" value="#{data.article.summary}").input
+			input(type="text" name="summary" id="summary" value="#{data.article.summary ? data.article.summary : ''}").input
 
 			label(for="description") Article
 			textarea(name="description" id="description").input.editor #{data.article.description}

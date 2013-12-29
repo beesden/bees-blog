@@ -1,0 +1,36 @@
+extend layout
+block content
+	ol.breadcrumbs
+		li: a(href="/") Dashboard
+		li: a(href="/pages/") Pages
+		li 
+			if data.page.name
+				span Edit page
+			else
+				span Add page	
+	if data.page.name
+		h1 Edit page
+	else
+		h1 Add page
+	form(method="POST" name="article" action="/page").dataForm
+		if data.page.name
+			input(type="text" name="id" value="#{data.page.id}")
+		fieldset
+			if data.page.name
+				legend Fill in the fields to update an existing page
+			else
+				legend Fill in the fields to create a new page
+
+			label(for="heading") Heading
+			input(type="text" name="heading" id="heading" value="#{data.page.heading ? data.page.heading : ''}").input
+
+			label(for="name") URL
+			input(type="text" name="name" id="name" value="#{data.page.name ? data.page.name : ''}").input
+
+			label(for="pageOrder") Order
+			input(type="number" name="pageOrder" id="pageOrder" value="#{data.page.pageOrder ? data.page.pageOrder : ''}").input
+
+			label(for="content") Content
+			textarea(name="content" id="content").input.editor #{data.page.content}
+
+			button.button Save changes

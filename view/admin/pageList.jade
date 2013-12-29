@@ -1,0 +1,25 @@
+extend layout
+block content
+	ol.breadcrumbs
+		li: a(href="/") Dashboard
+		li: span Pages
+	if update 
+		.msgConfirm Your page has been succesfully updated.
+	h1 Pages
+	if data.pagination
+		if url
+			include ../partials/pagination
+		.pageSummary Displaying #{data.pagination.firstIndex} - #{data.pagination.lastIndex} of #{data.pagination.totalResults} results
+	ul.list
+		li.listTitle
+			span.title Title
+			span.date Order
+		for page in data.pages
+			li.listItem
+				a(href='/page/#{page.name}').title #{page.heading}
+				span.date=page.pageOrder
+
+	a(href="/page/create").button Add page
+
+	if data.pagination && url
+		include ../partials/pagination

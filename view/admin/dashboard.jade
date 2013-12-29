@@ -1,0 +1,51 @@
+extend layout
+block content
+	ol.breadcrumbs
+		li: span Dashboard
+	h1 Bees Blog Admin Area
+	ul.dashboard
+		if user
+			li
+				h2 Your Account
+				div.info.account
+					p
+						strong Name: 
+						span=user.name
+					p
+						strong Username: 
+						span=user.username
+					p
+						strong: a(href="/user/#{user.name}") Manage account
+		if data && data.articles && data.pubArticles		
+			li
+				h2 Articles
+				div.info
+					p
+						strong Published articles: 
+						span=data.pubArticles.length
+					p
+						strong Most recent: 
+						span: a(href="/post/#{data.pubArticles[0].name}").recent #{data.pubArticles[0].heading}
+					p
+						strong Total articles: 
+						span=data.articles
+					p
+						strong: a(href="/posts/") Manage articles
+		if data && data.pages			
+			li
+				h2 Pages
+				div.info
+					p
+						strong Content pages: 
+						span=data.pages.length
+					p
+						strong: a(href="/pages/") Manage pages
+		if data && data.users			
+			li
+				h2 Users
+				div.info
+					p
+						strong Authors / Users: 
+						span=data.users.length
+					p
+						strong: a(href="/users/") Manage users

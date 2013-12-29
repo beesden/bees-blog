@@ -11,9 +11,9 @@ html
 			label(for='profile').toggleLabel &equiv;
 			input(type='checkbox')#profile.toggle
 			.toggleShow.profile
-				img(src="http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=64")
+				img(src="/assets/users/default.png" alt="#{user.name}")
 				span Welcome, #{user.name}
-				a(href="/users/#{user.name}") Edit user
+				a(href="/user/#{user.name}") Edit user
 				a(href="/logout") Log out
 
 			label(for='toggle').toggleLabel.tablet &equiv;
