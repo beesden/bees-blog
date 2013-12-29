@@ -13,7 +13,7 @@ Current Features:
 - Lightweight responsive design
 - Seperate admin & blog servers
 - Session based username / password authentication for admin area
-- Admin area with post list / form (submission not working)
+- Admin area with lists / forms (create not working)
 
 Run Instructions:
 -----------------
